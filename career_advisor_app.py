@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
+import pandas # API used to filter tables (from excel)
 
 career_app = tk.Tk()
 career_app.title("Career Advisor App")
@@ -85,27 +86,37 @@ def science():
     sci_label = ttk.Label(sci_wind, text= "Select Science(s) completed")
     sci_label.pack(pady=10)
 
-    sci_var = tk.StringVar()
+    sci1_var = tk.StringVar()
+    sci2_var = tk.StringVar()
+    sci3_var = tk.StringVar()
+    sci4_var = tk.StringVar()
+    sci5_var = tk.StringVar()
+
 
     def empty():
         pass
 
     # Checkbuttons (multiple selection) since you can do more than one science
 
-    sci_check1 = ttk.Checkbutton(sci_wind, text="Biology", command=empty, variable=sci_var, onvalue="Biology", offvalue="")
+    sci_check1 = ttk.Checkbutton(sci_wind, text="Biology", command=empty, variable=sci1_var, onvalue="Biology", offvalue="")
     sci_check1.pack(anchor='w')
 
-    sci_check2 = ttk.Checkbutton(sci_wind, text="Chemistry", command=empty, variable=sci_var, onvalue="Chemistry", offvalue="")
+    sci_check2 = ttk.Checkbutton(sci_wind, text="Chemistry", command=empty, variable=sci2_var, onvalue="Chemistry", offvalue="")
     sci_check2.pack(anchor='w')
 
-    sci_check3 = ttk.Checkbutton(sci_wind, text="Physics", command=empty, variable=sci_var, onvalue="Physics", offvalue="")
+    sci_check3 = ttk.Checkbutton(sci_wind, text="Physics", command=empty, variable=sci3_var, onvalue="Physics", offvalue="")
     sci_check3.pack(anchor='w')
 
-    sci_check4 = ttk.Checkbutton(sci_wind, text="Earth and Environmental", command=empty, variable=sci_var, onvalue="Earth and Environmental", offvalue="")
+    sci_check4 = ttk.Checkbutton(sci_wind, text="Earth and Environmental", command=empty, variable=sci4_var, onvalue="Earth and Environmental", offvalue="")
     sci_check4.pack(anchor='w')
+
+    sci_check5 = ttk.Checkbutton(sci_wind, text="Investigating Science", command=empty, variable=sci5_var, onvalue="Investigating Science", offvalue="")
+    sci_check5.pack(anchor='w')
 
     def submit():
         sci_wind.destroy()
+        sciences_comp = [sci1_var.get(), sci2_var.get(), sci3_var.get(), sci4_var.get(), sci5_var.get()]
+        print(sciences_comp)
 
     next_button = ttk.Button(sci_wind, text="Submit", command=submit)
     next_button.pack(pady=10)
@@ -118,27 +129,32 @@ def technology():
     tech_label = ttk.Label(tech_wind, text= "Select Technologies completed")
     tech_label.pack(pady=10)
 
-    tech_var = tk.StringVar()
+    tech1_var = tk.StringVar()
+    tech2_var = tk.StringVar()
+    tech3_var = tk.StringVar()
+    tech4_var = tk.StringVar()
 
     def empty():
         pass
 
     # Checkbuttons (multiple selection) since you can do more than one technology
 
-    tech_check1 = ttk.Checkbutton(tech_wind, text="Design and Technology", command=empty, variable=tech_var, onvalue="Design and Technology", offvalue="")
+    tech_check1 = ttk.Checkbutton(tech_wind, text="Design and Technology", command=empty, variable=tech1_var, onvalue="Design and Technology", offvalue="")
     tech_check1.pack(anchor='w')
 
-    tech_check2 = ttk.Checkbutton(tech_wind, text="Software Design and Development", command=empty, variable=tech_var, onvalue="Software Design and Development", offvalue="")
+    tech_check2 = ttk.Checkbutton(tech_wind, text="Software Design and Development", command=empty, variable=tech2_var, onvalue="Software Design and Development", offvalue="")
     tech_check2.pack(anchor='w')
 
-    tech_check3 = ttk.Checkbutton(tech_wind, text="Industrial Technology - Timber and Furniture", command=empty, variable=tech_var, onvalue="Timber", offvalue="")
+    tech_check3 = ttk.Checkbutton(tech_wind, text="Industrial Technology - Timber and Furniture", command=empty, variable=tech3_var, onvalue="Timber", offvalue="")
     tech_check3.pack(anchor='w')
 
-    tech_check4 = ttk.Checkbutton(tech_wind, text="Engineering Studies", command=empty, variable=tech_var, onvalue="Engineering", offvalue="")
+    tech_check4 = ttk.Checkbutton(tech_wind, text="Engineering Studies", command=empty, variable=tech4_var, onvalue="Engineering", offvalue="")
     tech_check4.pack(anchor='w')
 
     def submit():
         tech_wind.destroy()
+        tech_comp = [tech1_var.get(), tech2_var.get(), tech3_var.get(), tech4_var.get()]
+        print(tech_comp)
 
     next_button = ttk.Button(tech_wind, text="Submit", command=submit)
     next_button.pack(pady=10)
@@ -151,33 +167,40 @@ def language():
     lang_label = ttk.Label(lang_wind, text= "Select Language(s) completed")
     lang_label.pack(pady=10)
 
-    lang_var = tk.StringVar()
+    lang1_var = tk.StringVar()
+    lang2_var = tk.StringVar()
+    lang3_var = tk.StringVar()
+    lang4_var = tk.StringVar()
+    lang5_var = tk.StringVar()
+    lang6_var = tk.StringVar()
 
     def empty():
         pass
 
     # Checkbuttons (multiple selection) since you can do more than one technology
 
-    lang_check1 = ttk.Checkbutton(lang_wind, text="Chinese Beginners", command=empty, variable=lang_var, onvalue="Chinese Beginners", offvalue="")
+    lang_check1 = ttk.Checkbutton(lang_wind, text="Chinese Beginners", command=empty, variable=lang1_var, onvalue="Chinese Beginners", offvalue="")
     lang_check1.pack(anchor='w')
 
-    lang_check2 = ttk.Checkbutton(lang_wind, text="Chinese Continuers", command=empty, variable=lang_var, onvalue="Chinese Continuers", offvalue="")
+    lang_check2 = ttk.Checkbutton(lang_wind, text="Chinese Continuers", command=empty, variable=lang2_var, onvalue="Chinese Continuers", offvalue="")
     lang_check2.pack(anchor='w')
 
-    lang_check3 = ttk.Checkbutton(lang_wind, text="Italian Beginners", command=empty, variable=lang_var, onvalue="Italian Beginners", offvalue="")
+    lang_check3 = ttk.Checkbutton(lang_wind, text="Italian Beginners", command=empty, variable=lang3_var, onvalue="Italian Beginners", offvalue="")
     lang_check3.pack(anchor='w')
 
-    lang_check4 = ttk.Checkbutton(lang_wind, text="Italian Continuers", command=empty, variable=lang_var, onvalue="Italian Continuers", offvalue="")
+    lang_check4 = ttk.Checkbutton(lang_wind, text="Italian Continuers", command=empty, variable=lang4_var, onvalue="Italian Continuers", offvalue="")
     lang_check4.pack(anchor='w')
 
-    lang_check5 = ttk.Checkbutton(lang_wind, text="Japanese Beginners", command=empty, variable=lang_var, onvalue="Japanese Beginners", offvalue="")
+    lang_check5 = ttk.Checkbutton(lang_wind, text="Japanese Beginners", command=empty, variable=lang5_var, onvalue="Japanese Beginners", offvalue="")
     lang_check5.pack(anchor='w')
 
-    lang_check6 = ttk.Checkbutton(lang_wind, text="Japanese Continuers", command=empty, variable=lang_var, onvalue="Japanese Continuers", offvalue="")
+    lang_check6 = ttk.Checkbutton(lang_wind, text="Japanese Continuers", command=empty, variable=lang6_var, onvalue="Japanese Continuers", offvalue="")
     lang_check6.pack(anchor='w')
 
     def submit():
         lang_wind.destroy()
+        lang_comp = [lang1_var.get(), lang2_var.get(), lang3_var.get(), lang4_var.get(), lang5_var.get(), lang6_var.get()]
+        print(lang_comp)
 
     next_button = ttk.Button(lang_wind, text="Submit", command=submit)
     next_button.pack(pady=10)
@@ -190,42 +213,52 @@ def humanities():
     hum_label = ttk.Label(hum_wind, text= "Select Humanities completed")
     hum_label.pack(pady=10)
 
-    hum_var = tk.StringVar()
+    hum1_var = tk.StringVar()
+    hum2_var = tk.StringVar()
+    hum3_var = tk.StringVar()
+    hum4_var = tk.StringVar()
+    hum5_var = tk.StringVar()
+    hum6_var = tk.StringVar()
+    hum7_var = tk.StringVar()
+    hum8_var = tk.StringVar()
+    hum9_var = tk.StringVar()
 
     def empty():
         pass
 
     # Checkbuttons (multiple selection) since you can do more than one technology
 
-    hum_check1 = ttk.Checkbutton(hum_wind, text="Ancient History", command=empty, variable=hum_var, onvalue="Ancient History", offvalue="")
+    hum_check1 = ttk.Checkbutton(hum_wind, text="Ancient History", command=empty, variable=hum1_var, onvalue="Ancient History", offvalue="")
     hum_check1.pack(anchor='w')
 
-    hum_check2 = ttk.Checkbutton(hum_wind, text="Modern History", command=empty, variable=hum_var, onvalue="Modern History", offvalue="")
+    hum_check2 = ttk.Checkbutton(hum_wind, text="Modern History", command=empty, variable=hum2_var, onvalue="Modern History", offvalue="")
     hum_check2.pack(anchor='w')
 
-    hum_check3 = ttk.Checkbutton(hum_wind, text="History Extension", command=empty, variable=hum_var, onvalue="History Extension", offvalue="")
+    hum_check3 = ttk.Checkbutton(hum_wind, text="History Extension", command=empty, variable=hum3_var, onvalue="History Extension", offvalue="")
     hum_check3.pack(anchor='w')
 
-    hum_check4 = ttk.Checkbutton(hum_wind, text="Buisness Studies", command=empty, variable=hum_var, onvalue="Buisness", offvalue="")
+    hum_check4 = ttk.Checkbutton(hum_wind, text="Buisness Studies", command=empty, variable=hum4_var, onvalue="Buisness", offvalue="")
     hum_check4.pack(anchor='w')
 
-    hum_check5 = ttk.Checkbutton(hum_wind, text="Economics", command=empty, variable=hum_var, onvalue="Economics", offvalue="")
+    hum_check5 = ttk.Checkbutton(hum_wind, text="Economics", command=empty, variable=hum5_var, onvalue="Economics", offvalue="")
     hum_check5.pack(anchor='w')
 
-    hum_check6 = ttk.Checkbutton(hum_wind, text="Legal Studies", command=empty, variable=hum_var, onvalue="Legal Studies", offvalue="")
+    hum_check6 = ttk.Checkbutton(hum_wind, text="Legal Studies", command=empty, variable=hum6_var, onvalue="Legal Studies", offvalue="")
     hum_check6.pack(anchor='w')
 
-    hum_check7 = ttk.Checkbutton(hum_wind, text="Geography", command=empty, variable=hum_var, onvalue="Geography", offvalue="")
+    hum_check7 = ttk.Checkbutton(hum_wind, text="Geography", command=empty, variable=hum7_var, onvalue="Geography", offvalue="")
     hum_check7.pack(anchor='w')
 
-    hum_check8 = ttk.Checkbutton(hum_wind, text="Studies of Religion I", command=empty, variable=hum_var, onvalue="Studies of Religion I", offvalue="")
+    hum_check8 = ttk.Checkbutton(hum_wind, text="Studies of Religion I", command=empty, variable=hum8_var, onvalue="Studies of Religion I", offvalue="")
     hum_check8.pack(anchor='w')
 
-    hum_check9 = ttk.Checkbutton(hum_wind, text="Studies of Religion II", command=empty, variable=hum_var, onvalue="Studies of Religion II", offvalue="")
+    hum_check9 = ttk.Checkbutton(hum_wind, text="Studies of Religion II", command=empty, variable=hum9_var, onvalue="Studies of Religion II", offvalue="")
     hum_check9.pack(anchor='w')
 
     def submit():
         hum_wind.destroy()
+        hum_comp = [hum1_var.get(), hum2_var.get(), hum3_var.get(), hum4_var.get(), hum5_var.get(), hum6_var.get(), hum7_var.get(), hum8_var.get(), hum9_var.get()]
+        print(hum_comp)
 
     next_button = ttk.Button(hum_wind, text="Submit", command=submit)
     next_button.pack(pady=10)
@@ -238,27 +271,32 @@ def misc():
     misc_label = ttk.Label(misc_wind, text= "Select Technologies completed")
     misc_label.pack(pady=10)
 
-    misc_var = tk.StringVar()
+    misc1_var = tk.StringVar()
+    misc2_var = tk.StringVar()
+    misc3_var = tk.StringVar()
+    misc4_var = tk.StringVar()
 
     def empty():
         pass
 
     # Checkbuttons (multiple selection) since you can do more than one technology
 
-    misc_check1 = ttk.Checkbutton(misc_wind, text="PDHPE", command=empty, variable=misc_var, onvalue="PDHPE", offvalue="")
+    misc_check1 = ttk.Checkbutton(misc_wind, text="PDHPE", command=empty, variable=misc1_var, onvalue="PDHPE", offvalue="")
     misc_check1.pack(anchor='w')
 
-    misc_check2 = ttk.Checkbutton(misc_wind, text="Drama", command=empty, variable=misc_var, onvalue="Drama", offvalue="")
+    misc_check2 = ttk.Checkbutton(misc_wind, text="Drama", command=empty, variable=misc2_var, onvalue="Drama", offvalue="")
     misc_check2.pack(anchor='w')
 
-    misc_check3 = ttk.Checkbutton(misc_wind, text="Music 1", command=empty, variable=misc_var, onvalue="Music `1", offvalue="")
+    misc_check3 = ttk.Checkbutton(misc_wind, text="Music 1", command=empty, variable=misc3_var, onvalue="Music `1", offvalue="")
     misc_check3.pack(anchor='w')
 
-    misc_check4 = ttk.Checkbutton(misc_wind, text="Music 2", command=empty, variable=misc_var, onvalue="Music 2", offvalue="")
+    misc_check4 = ttk.Checkbutton(misc_wind, text="Music 2", command=empty, variable=misc4_var, onvalue="Music 2", offvalue="")
     misc_check4.pack(anchor='w')
 
     def submit():
         misc_wind.destroy()
+        misc_comp = [misc1_var.get(), misc2_var.get(), misc3_var.get(), misc4_var.get()]
+        print(misc_comp)
 
     next_button = ttk.Button(misc_wind, text="Submit", command=submit)
     next_button.pack(pady=10)
@@ -292,5 +330,17 @@ def main():
 start_btn = ttk.Button(career_app, text= "Start", command=main)
 start_btn.pack(pady=10)
 
-
 career_app.mainloop()
+
+
+# TO DO
+
+# After subjects are selected, user needs to order their subjects in order of enjoyment
+# (MAYBE) List of hobbies, co-cirriculars, sports, etc. to further differentiate choices
+# Collate possible degrees into a table, with university and reccomended courses listed next to it
+
+    # EG.        Bachelor of Science |  USYD  |  Biology, Chemistry, Physics, Earth and Env, Inv Science
+
+# Take prioritised subject and the student type they fit into (eg. Science student) and eliminate degrees which don't fit user
+# Produce degree that most fits user, alongside which University(ies) that offers that degree
+# Underneath produce alternative degrees possibly based off their second and third highest subject
