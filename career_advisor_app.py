@@ -7,6 +7,12 @@ career_app = tk.Tk()
 career_app.title("Career Advisor App")
 career_app.geometry("400x400")
 
+user_selections = []
+
+def update_selection_label():
+    selections_text = ", ".join(user_selections)
+    selection_label.config(text=f"You've selected: {selections_text}")
+
 def english():
     english_wind = Toplevel(career_app)
     english_wind.title("English")
@@ -38,7 +44,9 @@ def english():
     eng_radio6.pack(anchor='w')
 
     def submit():
+        user_selections.append(eng_var.get())
         english_wind.destroy()
+        update_selection_label()
 
     next_button = ttk.Button(english_wind, text="Submit", command=submit)
     next_button.pack(pady=10)
@@ -322,6 +330,9 @@ humanities_selection.pack(pady=6)
 
 misc_selection = ttk.Button(career_app, text= "Miscellaneous", command=misc)
 misc_selection.pack(pady=7)
+
+selection_label = ttk.Label(career_app, text="You've Selected: ")
+selection_label.pack(pady= 8)
 
 def main():
     pass
