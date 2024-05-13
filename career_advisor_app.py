@@ -5,13 +5,17 @@ import pandas # API used to filter tables (from excel)
 
 career_app = tk.Tk()
 career_app.title("Career Advisor App")
-career_app.geometry("400x400")
+career_app.geometry("700x400")
 
 user_selections = []
 
 def update_selection_label():
-    selections_text = ", ".join(user_selections)
-    selection_label.config(text=f"You've selected: {selections_text}")
+    # Filter out empty strings from the list
+    filtered_selections = [selection for selection in user_selections if selection]
+    
+    # Join the filtered selections with a comma and space
+    selections_text = ", ".join(filtered_selections)
+    selection_label.config(text=f"You've Selected: {selections_text}")
 
 def english():
     english_wind = Toplevel(career_app)
@@ -81,7 +85,9 @@ def maths():
     maths_radio5.pack(anchor='w')
 
     def submit():
+        user_selections.append(maths_var.get())
         maths_wind.destroy()
+        update_selection_label()
 
     next_button = ttk.Button(maths_wind, text="Submit", command=submit)
     next_button.pack(pady=10)
@@ -122,9 +128,17 @@ def science():
     sci_check5.pack(anchor='w')
 
     def submit():
+        # .extend() is used. It's an alternative to .append() and allows us to add multiple things to an array at once
+        user_selections.extend([
+            sci1_var.get() if sci1_var.get() else "",
+            sci2_var.get() if sci2_var.get() else "",
+            sci3_var.get() if sci3_var.get() else "",
+            sci4_var.get() if sci4_var.get() else "",
+            sci5_var.get() if sci5_var.get() else ""
+        ])
         sci_wind.destroy()
-        sciences_comp = [sci1_var.get(), sci2_var.get(), sci3_var.get(), sci4_var.get(), sci5_var.get()]
-        print(sciences_comp)
+        update_selection_label()
+
 
     next_button = ttk.Button(sci_wind, text="Submit", command=submit)
     next_button.pack(pady=10)
@@ -160,9 +174,14 @@ def technology():
     tech_check4.pack(anchor='w')
 
     def submit():
+        user_selections.extend([
+            tech1_var.get() if tech1_var.get() else "",
+            tech2_var.get() if tech2_var.get() else "",
+            tech3_var.get() if tech3_var.get() else "",
+            tech4_var.get() if tech4_var.get() else ""
+        ])
         tech_wind.destroy()
-        tech_comp = [tech1_var.get(), tech2_var.get(), tech3_var.get(), tech4_var.get()]
-        print(tech_comp)
+        update_selection_label()
 
     next_button = ttk.Button(tech_wind, text="Submit", command=submit)
     next_button.pack(pady=10)
@@ -206,9 +225,17 @@ def language():
     lang_check6.pack(anchor='w')
 
     def submit():
+        user_selections.extend([
+            lang1_var.get() if lang1_var.get() else "",
+            lang2_var.get() if lang2_var.get() else "",
+            lang3_var.get() if lang3_var.get() else "",
+            lang4_var.get() if lang4_var.get() else "",
+            lang5_var.get() if lang5_var.get() else "",
+            lang6_var.get() if lang6_var.get() else ""
+        ])
         lang_wind.destroy()
-        lang_comp = [lang1_var.get(), lang2_var.get(), lang3_var.get(), lang4_var.get(), lang5_var.get(), lang6_var.get()]
-        print(lang_comp)
+        update_selection_label()
+
 
     next_button = ttk.Button(lang_wind, text="Submit", command=submit)
     next_button.pack(pady=10)
@@ -264,9 +291,20 @@ def humanities():
     hum_check9.pack(anchor='w')
 
     def submit():
+        user_selections.extend([
+            hum1_var.get() if hum1_var.get() else "",
+            hum2_var.get() if hum2_var.get() else "",
+            hum3_var.get() if hum3_var.get() else "",
+            hum4_var.get() if hum4_var.get() else "",
+            hum5_var.get() if hum5_var.get() else "",
+            hum6_var.get() if hum6_var.get() else "",
+            hum7_var.get() if hum7_var.get() else "",
+            hum8_var.get() if hum8_var.get() else "",
+            hum9_var.get() if hum9_var.get() else ""
+        ])
         hum_wind.destroy()
-        hum_comp = [hum1_var.get(), hum2_var.get(), hum3_var.get(), hum4_var.get(), hum5_var.get(), hum6_var.get(), hum7_var.get(), hum8_var.get(), hum9_var.get()]
-        print(hum_comp)
+        update_selection_label()
+
 
     next_button = ttk.Button(hum_wind, text="Submit", command=submit)
     next_button.pack(pady=10)
@@ -302,9 +340,14 @@ def misc():
     misc_check4.pack(anchor='w')
 
     def submit():
+        user_selections.extend([
+            misc1_var.get() if misc1_var.get() else "",
+            misc2_var.get() if misc1_var.get() else "",
+            misc3_var.get() if misc1_var.get() else "",
+            misc4_var.get() if misc1_var.get() else ""
+        ])
         misc_wind.destroy()
-        misc_comp = [misc1_var.get(), misc2_var.get(), misc3_var.get(), misc4_var.get()]
-        print(misc_comp)
+        update_selection_label()
 
     next_button = ttk.Button(misc_wind, text="Submit", command=submit)
     next_button.pack(pady=10)
@@ -334,11 +377,22 @@ misc_selection.pack(pady=7)
 selection_label = ttk.Label(career_app, text="You've Selected: ")
 selection_label.pack(pady= 8)
 
-def main():
-    pass
+def ranking():
+    career_app.withdraw()
+    
+    rank_win = Toplevel(career_app)
+    rank_win.title = "Favourite Subject"
+    rank_win.geometry("400x400")
+
+    rank_main_label = ttk.Label(rank_win, text= "You have selected:")
+    rank_main_label.pack(pady=1)
+
+    # To Be Finished
 
 
-start_btn = ttk.Button(career_app, text= "Start", command=main)
+
+
+start_btn = ttk.Button(career_app, text= "Start", command=ranking)
 start_btn.pack(pady=10)
 
 career_app.mainloop()
