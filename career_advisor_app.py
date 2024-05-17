@@ -29,23 +29,21 @@ def english():
 
     # Radiobuttons (singular selection) since you can't do more than one kind of English
 
-    eng_radio1 = ttk.Radiobutton(english_wind, text="English Standard", variable=eng_var, value="English Std")
-    eng_radio1.pack(anchor='w')
+    english_subjects = ["English Standard", 
+                        "English Advanced", 
+                        "English Ext 1", 
+                        "English Ext 2", 
+                        "English as an Aditional Language", 
+                        "English Studies"]
+    length = len(english_subjects)
 
-    eng_radio2 = ttk.Radiobutton(english_wind, text="English Advanced", variable=eng_var, value="English Adv")
-    eng_radio2.pack(anchor='w')
 
-    eng_radio3 = ttk.Radiobutton(english_wind, text="English Ext 1", variable=eng_var, value="English Ext 1")
-    eng_radio3.pack(anchor='w')
-
-    eng_radio4 = ttk.Radiobutton(english_wind, text="English Ext 2", variable=eng_var, value="English Ext 2")
-    eng_radio4.pack(anchor='w')
-
-    eng_radio5 = ttk.Radiobutton(english_wind, text="English as an Aditional Language", variable=eng_var, value="EALD")
-    eng_radio5.pack(anchor='w')
-
-    eng_radio6 = ttk.Radiobutton(english_wind, text="English Studies", variable=eng_var, value="English Studies")
-    eng_radio6.pack(anchor='w')
+    for i in range(length):
+        radio_btn = ttk.Radiobutton(english_wind, 
+                                    text=english_subjects[i], 
+                                    variable=eng_var, 
+                                    value=english_subjects[i])
+        radio_btn.pack(anchor='w')
 
     def submit():
         user_selections.append(eng_var.get())
@@ -67,22 +65,18 @@ def maths():
 
     maths_var = tk.StringVar()
 
-    # Radiobuttons (singular selection) since you can't do more than one kind of English
+    # Radiobuttons (singular selection) since you can't do more than one kind of Maths*
 
-    maths_radio1 = ttk.Radiobutton(maths_wind, text="Maths Standard", variable=maths_var, value="Maths Std")
-    maths_radio1.pack(anchor='w')
+    math_subjects = ["Maths Standard",
+                     "Maths Advanced",
+                     "Maths Ext 1",
+                     "Maths Ext 2"]
+    
+    length = len(math_subjects)
 
-    maths_radio2 = ttk.Radiobutton(maths_wind, text="Maths Advanced", variable=maths_var, value="Maths Adv")
-    maths_radio2.pack(anchor='w')
-
-    maths_radio3 = ttk.Radiobutton(maths_wind, text="Maths Ext 1", variable=maths_var, value="Maths Ext 1")
-    maths_radio3.pack(anchor='w')
-
-    maths_radio4 = ttk.Radiobutton(maths_wind, text="Maths Ext 2", variable=maths_var, value="Maths Ext 2")
-    maths_radio4.pack(anchor='w')
-
-    # maths_radio5 = ttk.Radiobutton(maths_wind, text="No Maths", variable=maths_var, value="No Maths")
-    # maths_radio5.pack(anchor='w')
+    for i in range(length):
+        radio_btn = ttk.Radiobutton(maths_wind, text=math_subjects[i], variable=maths_var, value=math_subjects[i])
+        radio_btn.pack(anchor='w')
 
     def submit():
         user_selections.append(maths_var.get())
@@ -100,32 +94,24 @@ def science():
     sci_label = ttk.Label(sci_wind, text= "Select Science(s) completed")
     sci_label.pack(pady=10)
 
-    sci1_var = tk.StringVar()
-    sci2_var = tk.StringVar()
-    sci3_var = tk.StringVar()
-    sci4_var = tk.StringVar()
-    sci5_var = tk.StringVar()
+    science_subjects = ["Biology",
+                        "Chemistry",
+                        "Physics",
+                        "Earth and Environmental",
+                        "Investigating Science"]
+    
+    length = len(science_subjects)
 
-
+    # Checkbuttons don't need to do anything, so an empty function is placed
     def empty():
         pass
 
-    # Checkbuttons (multiple selection) since you can do more than one science
+     # Checkbuttons (multiple selection) since you can do more than one science
 
-    sci_check1 = ttk.Checkbutton(sci_wind, text="Biology", command=empty, variable=sci1_var, onvalue="Biology", offvalue="")
-    sci_check1.pack(anchor='w')
-
-    sci_check2 = ttk.Checkbutton(sci_wind, text="Chemistry", command=empty, variable=sci2_var, onvalue="Chemistry", offvalue="")
-    sci_check2.pack(anchor='w')
-
-    sci_check3 = ttk.Checkbutton(sci_wind, text="Physics", command=empty, variable=sci3_var, onvalue="Physics", offvalue="")
-    sci_check3.pack(anchor='w')
-
-    sci_check4 = ttk.Checkbutton(sci_wind, text="Earth and Environmental", command=empty, variable=sci4_var, onvalue="Earth and Environmental", offvalue="")
-    sci_check4.pack(anchor='w')
-
-    sci_check5 = ttk.Checkbutton(sci_wind, text="Investigating Science", command=empty, variable=sci5_var, onvalue="Investigating Science", offvalue="")
-    sci_check5.pack(anchor='w')
+    for i in range(length):
+        sci_var = tk.StringVar()
+        check_btn = ttk.Checkbutton(sci_wind, text=science_subjects[i], command=empty, variable=sci_var, onvalue=science_subjects[i], offvalue="")
+        check_btn.pack(anchor='w')
 
     def submit():
         # .extend() is used. It's an alternative to .append() and allows us to add multiple things to an array at once
