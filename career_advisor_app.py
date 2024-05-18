@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
-import pandas # API used to filter tables (from excel)
+import pandas as pd # API used to filter tables (from excel)
 
 career_app = tk.Tk()
 career_app.title("Career Advisor App")
@@ -94,24 +94,32 @@ def science():
     sci_label = ttk.Label(sci_wind, text= "Select Science(s) completed")
     sci_label.pack(pady=10)
 
-    science_subjects = ["Biology",
-                        "Chemistry",
-                        "Physics",
-                        "Earth and Environmental",
-                        "Investigating Science"]
-    
-    length = len(science_subjects)
-
-    # Checkbuttons don't need to do anything, so an empty function is placed
+    # Checkbuttons don't need to do anything, so an empty function is created
     def empty():
         pass
+    
+    sci1_var = tk.StringVar()
+    sci2_var = tk.StringVar()
+    sci3_var = tk.StringVar()
+    sci4_var = tk.StringVar()
+    sci5_var = tk.StringVar()
 
-     # Checkbuttons (multiple selection) since you can do more than one science
+    # Checkbuttons (multiple selection) since you can do more than one science
 
-    for i in range(length):
-        sci_var = tk.StringVar()
-        check_btn = ttk.Checkbutton(sci_wind, text=science_subjects[i], command=empty, variable=sci_var, onvalue=science_subjects[i], offvalue="")
-        check_btn.pack(anchor='w')
+    sci_check1 = ttk.Checkbutton(sci_wind, text="Biology", command=empty, variable=sci1_var, onvalue="Biology", offvalue="")
+    sci_check1.pack(anchor='w')
+
+    sci_check2 = ttk.Checkbutton(sci_wind, text="Chemistry", command=empty, variable=sci2_var, onvalue="Chemistry", offvalue="")
+    sci_check2.pack(anchor='w')
+
+    sci_check3 = ttk.Checkbutton(sci_wind, text="Physics", command=empty, variable=sci3_var, onvalue="Physics", offvalue="")
+    sci_check3.pack(anchor='w')
+
+    sci_check4 = ttk.Checkbutton(sci_wind, text="Earth and Environmental", command=empty, variable=sci4_var, onvalue="Earth and Environmental", offvalue="")
+    sci_check4.pack(anchor='w')
+
+    sci_check5 = ttk.Checkbutton(sci_wind, text="Investigating Science", command=empty, variable=sci5_var, onvalue="Investigating Science", offvalue="")
+    sci_check5.pack(anchor='w')
 
     def submit():
         # .extend() is used. It's an alternative to .append() and allows us to add multiple things to an array at once
@@ -395,19 +403,30 @@ def ranking():
         rank_combos.append(rank_combo)
         rank_combo.state(['readonly']) # prevents people typing their own responses into dropdowns
 
-
-
-    def submit_ranking():
+    def subject_filter():
+        # New array for ranked subject list
         rankings = [rank_var.get() for rank_var in rank_vars]
-        print(rankings)
-        # print(subject)
+        # print(rankings)
+        
+        # Reads the data from the csv file (containing all the degrees, subjects, universities, etc.)
+        df = pd.read_csv("uac_data.csv")
 
-    submit_button = ttk.Button(rank_win, text="Submit Rankings", command=submit_ranking)
+        # Splits the strings in the columns into lists
+        df['Subjects'] = df['Suggested HSC Subjects'].str.split(', ')
+        df['Universities'] = df['Universities Offering the Degree'].str.split(', ')
+
+        # Filters the dataframe to only include rows where the subjects are in the rankings
+        filtered_df = df[df['Subjects'].apply(lambda x: any(subject in x for subject in rankings))]
+
+        # Prints out the degrees, universities, and recommended subjects (will remove later on, just for testing purposes)
+        for index, row in filtered_df.iterrows():
+            print(f"Degree: {row['Unique Course Name']}")
+            print(f"Universities: {', '.join(row['Universities'])}")
+            print(f"Recommended Courses: {', '.join(row['Subjects'])}")
+            print()
+
+    submit_button = ttk.Button(rank_win, text="Submit Rankings", command=subject_filter)
     submit_button.pack(pady=10)
-
-
-    # To Be Finished
-
 
 
 
