@@ -9,6 +9,7 @@ career_app.geometry("700x400")
 
 user_selections = []
 
+# Updates the label which reads "You've Selected: "
 def update_selection_label():
     # Filter out empty strings from the list
     filtered_selections = [selection for selection in user_selections if selection]
@@ -17,6 +18,7 @@ def update_selection_label():
     selections_text = ", ".join(filtered_selections)
     selection_label.config(text=f"You've Selected: {selections_text}")
 
+# Opens the window for the user to choose their level of English completed
 def english():
     english_wind = Toplevel(career_app)
     english_wind.title("English")
@@ -31,8 +33,8 @@ def english():
 
     english_subjects = ["English Standard", 
                         "English Advanced", 
-                        "English Ext 1", 
-                        "English Ext 2", 
+                        "English Extension 1", 
+                        "English Extension 2", 
                         "English as an Aditional Language", 
                         "English Studies"]
     length = len(english_subjects)
@@ -55,6 +57,7 @@ def english():
     
     return eng_var.get()
 
+# If the user has completed maths, they can choose their level of maths
 def maths():
     maths_wind = Toplevel(career_app)
     maths_wind.title("Maths")
@@ -67,10 +70,10 @@ def maths():
 
     # Radiobuttons (singular selection) since you can't do more than one kind of Maths*
 
-    math_subjects = ["Maths Standard",
-                     "Maths Advanced",
-                     "Maths Ext 1",
-                     "Maths Ext 2"]
+    math_subjects = ["Mathematics Standard",
+                     "Mathematics Advanced",
+                     "Mathematics Extension 1",
+                     "Mathematics Extension 2"]
     
     length = len(math_subjects)
 
@@ -86,6 +89,7 @@ def maths():
     next_button = ttk.Button(maths_wind, text="Submit", command=submit)
     next_button.pack(pady=10)
 
+# If the user is doing a science, this opens the window to choose the science(s)
 def science():
     sci_wind = Toplevel(career_app)
     sci_wind.title("Science")
@@ -115,7 +119,7 @@ def science():
     sci_check3 = ttk.Checkbutton(sci_wind, text="Physics", command=empty, variable=sci3_var, onvalue="Physics", offvalue="")
     sci_check3.pack(anchor='w')
 
-    sci_check4 = ttk.Checkbutton(sci_wind, text="Earth and Environmental", command=empty, variable=sci4_var, onvalue="Earth and Environmental", offvalue="")
+    sci_check4 = ttk.Checkbutton(sci_wind, text="Earth & Environmental", command=empty, variable=sci4_var, onvalue="Earth and Environmental", offvalue="")
     sci_check4.pack(anchor='w')
 
     sci_check5 = ttk.Checkbutton(sci_wind, text="Investigating Science", command=empty, variable=sci5_var, onvalue="Investigating Science", offvalue="")
@@ -137,6 +141,7 @@ def science():
     next_button = ttk.Button(sci_wind, text="Submit", command=submit)
     next_button.pack(pady=10)
 
+# If the user does a technology subject, this opens the window to choose the technology
 def technology():
     tech_wind = Toplevel(career_app)
     tech_wind.title("Technological and Applied Studies")
@@ -155,10 +160,10 @@ def technology():
 
     # Checkbuttons (multiple selection) since you can do more than one technology
 
-    tech_check1 = ttk.Checkbutton(tech_wind, text="Design and Technology", command=empty, variable=tech1_var, onvalue="Design and Tech", offvalue="")
+    tech_check1 = ttk.Checkbutton(tech_wind, text="Design and Technology", command=empty, variable=tech1_var, onvalue="Design and Technology", offvalue="")
     tech_check1.pack(anchor='w')
 
-    tech_check2 = ttk.Checkbutton(tech_wind, text="Software Design and Development", command=empty, variable=tech2_var, onvalue="Software", offvalue="")
+    tech_check2 = ttk.Checkbutton(tech_wind, text="Software Design and Development", command=empty, variable=tech2_var, onvalue="Software Design", offvalue="")
     tech_check2.pack(anchor='w')
 
     tech_check3 = ttk.Checkbutton(tech_wind, text="Industrial Technology - Timber and Furniture", command=empty, variable=tech3_var, onvalue="Timber", offvalue="")
@@ -180,6 +185,7 @@ def technology():
     next_button = ttk.Button(tech_wind, text="Submit", command=submit)
     next_button.pack(pady=10)
 
+# If the user does a language, this opens the window to choose the language(s)
 def language():
     lang_wind = Toplevel(career_app)
     lang_wind.title("Languages")
@@ -234,6 +240,7 @@ def language():
     next_button = ttk.Button(lang_wind, text="Submit", command=submit)
     next_button.pack(pady=10)
 
+# If the user does a humanities subject, this opens the window to choose the humanities subject(s)
 def humanities():
     hum_wind = Toplevel(career_app)
     hum_wind.title("Humanities")
@@ -266,13 +273,13 @@ def humanities():
     hum_check3 = ttk.Checkbutton(hum_wind, text="History Extension", command=empty, variable=hum3_var, onvalue="History Ext", offvalue="")
     hum_check3.pack(anchor='w')
 
-    hum_check4 = ttk.Checkbutton(hum_wind, text="Buisness Studies", command=empty, variable=hum4_var, onvalue="Buisness", offvalue="")
+    hum_check4 = ttk.Checkbutton(hum_wind, text="Buisness Studies", command=empty, variable=hum4_var, onvalue="Buisness Studies", offvalue="")
     hum_check4.pack(anchor='w')
 
     hum_check5 = ttk.Checkbutton(hum_wind, text="Economics", command=empty, variable=hum5_var, onvalue="Economics", offvalue="")
     hum_check5.pack(anchor='w')
 
-    hum_check6 = ttk.Checkbutton(hum_wind, text="Legal Studies", command=empty, variable=hum6_var, onvalue="Legal", offvalue="")
+    hum_check6 = ttk.Checkbutton(hum_wind, text="Legal Studies", command=empty, variable=hum6_var, onvalue="Legal Studies", offvalue="")
     hum_check6.pack(anchor='w')
 
     hum_check7 = ttk.Checkbutton(hum_wind, text="Geography", command=empty, variable=hum7_var, onvalue="Geography", offvalue="")
@@ -303,6 +310,7 @@ def humanities():
     next_button = ttk.Button(hum_wind, text="Submit", command=submit)
     next_button.pack(pady=10)
 
+# Contains the subjects which do not fit into a category
 def misc():
     misc_wind = Toplevel(career_app)
     misc_wind.title("Miscellaneous Subjects")
@@ -315,6 +323,7 @@ def misc():
     misc2_var = tk.StringVar()
     misc3_var = tk.StringVar()
     misc4_var = tk.StringVar()
+    misc5_var = tk.StringVar()
 
     def empty():
         pass
@@ -333,12 +342,16 @@ def misc():
     misc_check4 = ttk.Checkbutton(misc_wind, text="Music 2", command=empty, variable=misc4_var, onvalue="Music 2", offvalue="")
     misc_check4.pack(anchor='w')
 
+    misc_check5 = ttk.Checkbutton(misc_wind, text="Visual Arts", command=empty, variable=misc5_var, onvalue="Visual Arts")
+    misc_check5.pack(anchor='w')
+
     def submit():
         user_selections.extend([
             misc1_var.get() if misc1_var.get() else "",
-            misc2_var.get() if misc1_var.get() else "",
-            misc3_var.get() if misc1_var.get() else "",
-            misc4_var.get() if misc1_var.get() else ""
+            misc2_var.get() if misc2_var.get() else "",
+            misc3_var.get() if misc3_var.get() else "",
+            misc4_var.get() if misc4_var.get() else "",
+            misc5_var.get() if misc5_var.get() else ""
         ])
         misc_wind.destroy()
         update_selection_label()
@@ -346,21 +359,23 @@ def misc():
     next_button = ttk.Button(misc_wind, text="Submit", command=submit)
     next_button.pack(pady=10)
 
+# FOR LATER. ALLOWS ME TO FORMAT WIDGETS NICER.
 # canvas = Canvas()
 
+# English button. Opens english() (same for all the _selection variables)
 english_selection = ttk.Button(career_app, text= "English", command=english)
 english_selection.pack(pady=1)
 
-maths_selection = ttk.Button(career_app, text= "Maths", command=maths)
+maths_selection = ttk.Button(career_app, text= "Mathematics", command=maths)
 maths_selection.pack(pady=2)
 
-science_selection = ttk.Button(career_app, text= "Science", command=science)
+science_selection = ttk.Button(career_app, text= "Sciences", command=science)
 science_selection.pack(pady=3)
 
 tech_selection = ttk.Button(career_app, text= "Technological and Applied Studies", command=technology)
 tech_selection.pack(pady=4)
 
-language_selection = ttk.Button(career_app, text= "Language", command=language)
+language_selection = ttk.Button(career_app, text= "Languages", command=language)
 language_selection.pack(pady=5)
 
 humanities_selection = ttk.Button(career_app, text= "Humanities", command=humanities)
@@ -372,9 +387,12 @@ misc_selection.pack(pady=7)
 selection_label = ttk.Label(career_app, text="You've Selected: ")
 selection_label.pack(pady= 8)
 
+# Opens the ranking window so the user can determine the rank of their subject based off enjoyment
 def ranking():
+    # Hides main window
     career_app.withdraw()
     
+    # Establish properties for new win
     rank_win = Toplevel(career_app)
     rank_win.title = "Favourite Subject"
     rank_win.geometry("400x400")
@@ -391,11 +409,13 @@ def ranking():
     # Dropdown lists for each subject, user to select favourite to least fav
     rank_vars = []
     rank_combos = []
+
     # Enumerate allows you to access each item in an array, alongside a count value (important for ranking, stored in subject if I've applied this correctly)
     for i, subject in enumerate(filtered_selections, start=1): 
         subject_label = ttk.Label(rank_win, text=f"Rank {i} Subject:")
         subject_label.pack(pady=1)        
         
+        # Creates combo boxes for each subject chosen
         rank_var = StringVar()
         rank_vars.append(rank_var)
         rank_combo = ttk.Combobox(rank_win, textvariable=rank_var, values=filtered_selections)
@@ -403,6 +423,7 @@ def ranking():
         rank_combos.append(rank_combo)
         rank_combo.state(['readonly']) # prevents people typing their own responses into dropdowns
 
+    # TBC Is the function which will process the user's final choices
     def subject_filter():
         # New array for ranked subject list
         rankings = [rank_var.get() for rank_var in rank_vars]
@@ -413,7 +434,7 @@ def ranking():
 
         # Splits the strings in the columns into lists
         df['Subjects'] = df['Suggested HSC Subjects'].str.split(', ')
-        df['Universities'] = df['Universities Offering the Degree'].str.split(', ')
+        df['Universities'] = df['Universities Offering the Degree'].str.split(', ') # I get an error if I don't do this line for some reason
 
         # Filters the dataframe to only include rows where the subjects are in the rankings
         filtered_df = df[df['Subjects'].apply(lambda x: any(subject in x for subject in rankings))]
@@ -428,8 +449,7 @@ def ranking():
     submit_button = ttk.Button(rank_win, text="Submit Rankings", command=subject_filter)
     submit_button.pack(pady=10)
 
-
-
+# Button to open ranking window
 start_btn = ttk.Button(career_app, text= "Start", command=ranking)
 start_btn.pack(pady=10)
 
@@ -440,10 +460,10 @@ career_app.mainloop()
 
 # After subjects are selected, user needs to order their subjects in order of enjoyment ✅
 # (MAYBE) List of hobbies, co-cirriculars, sports, etc. to further differentiate choices
-# Collate possible degrees into a table, with university and reccomended courses listed next to it
+# Collate possible degrees into a table, with university and reccomended courses listed next to it ✅
 
     # EG.        Bachelor of Science |  USYD  |  Biology, Chemistry, Physics, Earth and Env, Inv Science
 
-# Take prioritised subject and the student type they fit into (eg. Science student) and eliminate degrees which don't fit user
+# Take prioritised subject and the student type they fit into (eg. Science student) and eliminate degrees which don't fit user ✅
 # Produce degree that most fits user, alongside which University(ies) that offers that degree
 # Underneath produce alternative degrees possibly based off their second and third highest subject
