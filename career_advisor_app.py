@@ -6,8 +6,9 @@ from tkinter import messagebox
 
 career_app = tk.Tk()
 career_app.title("Career Advisor App")
-career_app.geometry("700x400")
+career_app.geometry("600x400")
 
+# Stores the subjects that the user has selected
 user_selections = []
 
 # Updates the label which reads "You've Selected: "
@@ -65,6 +66,7 @@ def english():
             user_selections.append(eng_var.get())
             english_wind.destroy()
             update_selection_label()
+            career_app.deiconify()
 
     next_button = ttk.Button(english_wind, text="Submit", command=submit)
     next_button.pack(pady=10)
@@ -109,6 +111,7 @@ def maths():
         user_selections.append(maths_var.get())
         maths_wind.destroy()
         update_selection_label()
+        career_app.deiconify()
 
     next_button = ttk.Button(maths_wind, text="Submit", command=submit)
     next_button.pack(pady=10)
@@ -180,6 +183,7 @@ def science():
     
             sci_wind.destroy()
             update_selection_label()
+            career_app.deiconify()
 
 
     next_button = ttk.Button(sci_wind, text="Submit", command=submit)
@@ -234,6 +238,7 @@ def technology():
         ])
         tech_wind.destroy()
         update_selection_label()
+        career_app.deiconify()
 
     next_button = ttk.Button(tech_wind, text="Submit", command=submit)
     next_button.pack(pady=10)
@@ -293,6 +298,7 @@ def language():
     lang_check6.pack(anchor='w')
 
     def submit():
+        # Detects if a user has selected both a beginners and continuers course
         if (china_beg_var.get() and china_con_var.get()) or (italy_beg_var.get() and italy_cont_var.get()) or (japan_beg_var.get() and japan_cont_var.get()):
             messagebox.showerror("Error", "You cannot select both beginners and continuers for the same language.")
         else:
@@ -305,15 +311,18 @@ def language():
                 japan_cont_var.get()
             ]
             for subject in selected_subjects:
+                # Detects if the user has selected a subject that they've already selected
                 if subject and subject in user_selections:
                     if messagebox.askyesno(message="You have already selected this language. Do you want to remove it?", icon="warning", title="Warning"):
-                        user_selections.remove(subject)
+                        user_selections.remove(subject) # removes subject
                         lang_wind.destroy()
                         update_selection_label()
+                        career_app.deiconify()
                     return
             user_selections.extend(selected_subjects)
             lang_wind.destroy()
             update_selection_label()
+            career_app.deiconify()
 
 
     next_button = ttk.Button(lang_wind, text="Submit", command=submit)
@@ -393,6 +402,7 @@ def humanities():
         ])
         hum_wind.destroy()
         update_selection_label()
+        career_app.deiconify()
 
 
     next_button = ttk.Button(hum_wind, text="Submit", command=submit)
@@ -452,6 +462,7 @@ def misc():
         ])
         misc_wind.destroy()
         update_selection_label()
+        career_app.deiconify()
 
     next_button = ttk.Button(misc_wind, text="Submit", command=submit)
     next_button.pack(pady=10)
