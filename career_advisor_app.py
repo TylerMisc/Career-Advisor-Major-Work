@@ -474,6 +474,17 @@ def misc():
     back_button = ttk.Button(misc_wind, text="Back", command=back)
     back_button.pack(pady=10)
 
+def test():
+    user_selections.append("Mathematics Advanced")
+    user_selections.append("English Advanced")
+    user_selections.append("Biology")
+    user_selections.append("Chemistry")
+    user_selections.append("Software Design")
+    update_selection_label()
+
+test_btn = ttk.Button(career_app, text="Test", command=test)
+test_btn.pack(pady=10)
+
 # FOR LATER. ALLOWS ME TO FORMAT WIDGETS NICER.
 # canvas = Canvas()
 
@@ -528,26 +539,47 @@ def ranking():
             if selection:
                 filtered_selections.append(selection)
 
-        # Dropdown lists for each subject, user to select favourite to least fav
-        rank_vars = []
-        rank_combos = []
+        # Dropdown lists so user can select favourite subject, least favourite subject, and best performing subject
+        favourite_var = StringVar()
+        favourite_label = ttk.Label(rank_win, text="Select your favourite subject (enjoyment)")
+        favourite_label.pack(pady=2)
+        favourite_combo = ttk.Combobox(rank_win, textvariable=favourite_var, values=filtered_selections)
+        favourite_combo.pack(pady=2)
+        favourite_combo.state(['readonly'])
 
-        # Enumerate allows you to access each item in an array, alongside a count value (important for ranking, stored in subject if I've applied this correctly)
-        for i, subject in enumerate(filtered_selections, start=1): 
-            subject_label = ttk.Label(rank_win, text=f"Rank {i} Subject:")
-            subject_label.pack(pady=1)        
-            
-            # Creates combo boxes for each subject chosen
-            rank_var = StringVar()
-            rank_vars.append(rank_var)
-            rank_combo = ttk.Combobox(rank_win, textvariable=rank_var, values=filtered_selections)
-            rank_combo.pack(pady=2)
-            rank_combos.append(rank_combo)
-            rank_combo.state(['readonly']) # prevents people typing their own responses into dropdowns
+        least_favourite_var = StringVar()
+        least_favourite_label = ttk.Label(rank_win, text="Select your least favourite subject")
+        least_favourite_label.pack(pady=2)
+        least_favourite_combo = ttk.Combobox(rank_win, textvariable=least_favourite_var, values=filtered_selections)
+        least_favourite_combo.pack(pady=2)
+        least_favourite_combo.state(['readonly'])
+
+        performance_var = StringVar()
+        performance_label = ttk.Label(rank_win, text="Select the subject where you recieve the best marks")
+        performance_label.pack(pady=2)
+        performance_combo = ttk.Combobox(rank_win, textvariable=performance_var, values=filtered_selections)
+        performance_combo.pack(pady=2)
+        performance_combo.state(['readonly'])
+
+        uni_list = ["University of Sydney", "University of New South Wales", "University of Technology Sydney", 
+                    "Macquarie University", "University of Wollongong", "University of Newcastle", 
+                    "University of New England", "Charles Sturt University", "Southern Cross University", 
+                    "Australian Catholic University", "Western Sydney University", "University of Notre Dame", 
+                    "University of Canberra", "Australian National University", "Monash University", "La Trobe University",  
+                    "Griffith University", "CQ University", "Bond University", "Torrens University","Curtin University",
+                    "Charles Darwin University"]
+
+
+        university_selection_var = StringVar()
+        university_selection_label = ttk.Label(rank_win, text="Select your ideal university")
+        university_selection_label.pack(pady=2)
+        university_selection_combo = ttk.Combobox(rank_win, textvariable=university_selection_var, values=uni_list)
+        university_selection_combo.pack(pady=2)
+        university_selection_combo.state(['readonly'])
 
 
         # Slider for projected/predicted ATAR
-        number_slider = ttk.Scale(rank_win, from_=0, to=99.95, length=350, orient="horizontal")
+        number_slider = ttk.Scale(rank_win, from_=30, to=99.95, length=350, orient="horizontal")
         number_slider.pack(pady=10)
         
         # Label to display the user's projected ATAR
@@ -563,33 +595,43 @@ def ranking():
 
 
         # TBC Is the function which will process the user's final choices
-        def subject_filter():
-            # New array for ranked subject list
-            rankings = [rank_var.get() for rank_var in rank_vars]
-            # print(rankings)
-            
-            # Use only the first subject in the rankings array
-            filtered_rankings = rankings[:1]
-            
-            # Reads the data from the csv file (containing all the degrees, subjects, universities, etc.)
-            df = pd.read_csv("degree_table.csv")
+    def subject_filter():
+        # Initialize choice filters
+        choice_filters = [favourite_var.get(), performance_var.get()]
 
-            # Splits the strings in the columns into lists
-            df['Subjects'] = df['Relevant HSC Subjects'].str.split(', ')
-            df['Universities'] = df['University'].str.split(', ') # I get an error if I don't do this line for some reason
+        # Read the data from the csv file (containing all the degrees, subjects, universities, etc.)
+        df = pd.read_csv("degree_table.csv")
 
-            # Filters the dataframe to only include rows where the subjects are in the rankings
-            filtered_df = df[df['Subjects'].apply(lambda x: any(subject in x for subject in filtered_rankings))]
+        # Splits the strings in the columns into lists
+        df['Subjects'] = df['Relevant HSC Subjects'].str.split(', ')
+        df['Universities'] = df['University'].str.split(', ')
 
-            # Prints out the degrees, universities, and recommended subjects (will remove later on, just for testing purposes)
+        # Retrieve the selected university from the dropdown list
+        print(f"Selected University: {university_selection_var.get()}")
+
+        # Filter the dataframe to only include rows where the selected university is in the list of universities
+        filtered_df = df[df['Universities'].apply(lambda x: university_selection_var.get() in x)]
+
+        # Ensure 'Subjects' and 'Universities' columns are lists for the following filtering
+        if 'Subjects' in filtered_df.columns and 'Universities' in filtered_df.columns:
+            # Filter dataframe to only include degrees where the user's favourite and best performing subjects are included...
+            # the user's least favourite is excluded, and the predicted ATAR is less than or equal to the user's selection
+            filtered_df = filtered_df[
+                filtered_df['Subjects'].apply(lambda x: all(subject in x for subject in choice_filters) and least_favourite_var.get() not in x) # subjects
+                & (filtered_df['Prev LSR'] <= number_slider.get())] # ATAR
+
+            # Print out the degrees, subjects, and Prev LSR (for testing purposes)
             for index, row in filtered_df.iterrows():
                 print(f"Degree: {row['Course name']}")
-                print(f"Universities: {', '.join(row['Universities'])}")
-                print(f"Recommended Courses: {', '.join(row['Subjects'])}")
+                print(f"Subjects: {row['Relevant HSC Subjects']}")
+                print(f"Prev LSR: {row['Prev LSR']}")
                 print()
 
-        submit_button = ttk.Button(rank_win, text="Submit Rankings", command=subject_filter)
-        submit_button.pack(pady=10)
+        else:
+            print("Filtered dataframe does not have expected 'Subjects' or 'Universities' columns")
+
+    submit_button = ttk.Button(rank_win, text="Submit Rankings", command=subject_filter)
+    submit_button.pack(pady=10)
 
 # Button to open ranking window
 start_btn = ttk.Button(career_app, text= "Start", command=ranking)
@@ -607,5 +649,8 @@ career_app.mainloop()
     # EG.        Bachelor of Science |  USYD  |  Biology, Chemistry, Physics, Earth and Env, Inv Science
 
 # Take prioritised subject and the student type they fit into (eg. Science student) and eliminate degrees which don't fit user ✅
-# Produce degree that most fits user, alongside which University(ies) that offers that degree
+# Produce degree that most fits user, alongside which University(ies) that offers that degree ✅
+# Minor: Error messages for when a user has choices which don't produce any results
+# Some degrees (like a doctorate of medicine) have no LSR, but they are difficult so shouldn't be reccomended for people with low ATARs
+    # I might need to fix this manually, we'll see
 # Underneath produce alternative degrees possibly based off their second and third highest subject
