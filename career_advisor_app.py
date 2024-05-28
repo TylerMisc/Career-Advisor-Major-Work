@@ -572,18 +572,18 @@ def ranking():
             filtered_rankings = rankings[:1]
             
             # Reads the data from the csv file (containing all the degrees, subjects, universities, etc.)
-            df = pd.read_csv("uac_data.csv")
+            df = pd.read_csv("degree_table.csv")
 
             # Splits the strings in the columns into lists
-            df['Subjects'] = df['Suggested HSC Subjects'].str.split(', ')
-            df['Universities'] = df['Universities Offering the Degree'].str.split(', ') # I get an error if I don't do this line for some reason
+            df['Subjects'] = df['Relevant HSC Subjects'].str.split(', ')
+            df['Universities'] = df['University'].str.split(', ') # I get an error if I don't do this line for some reason
 
             # Filters the dataframe to only include rows where the subjects are in the rankings
             filtered_df = df[df['Subjects'].apply(lambda x: any(subject in x for subject in filtered_rankings))]
 
             # Prints out the degrees, universities, and recommended subjects (will remove later on, just for testing purposes)
             for index, row in filtered_df.iterrows():
-                print(f"Degree: {row['Unique Course Name']}")
+                print(f"Degree: {row['Course name']}")
                 print(f"Universities: {', '.join(row['Universities'])}")
                 print(f"Recommended Courses: {', '.join(row['Subjects'])}")
                 print()
