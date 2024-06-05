@@ -42,7 +42,7 @@ def english():
                         "English Advanced", 
                         "English Extension 1", 
                         "English Extension 2", 
-                        "English as an Aditional Language", 
+                        "English as an Additional Language", 
                         "English Studies"]
     length = len(english_subjects)
 
@@ -220,7 +220,7 @@ def technology():
     tech_check1 = ttk.Checkbutton(tech_wind, text="Design and Technology", command=empty, variable=tech1_var, onvalue="Design and Technology", offvalue="")
     tech_check1.pack(anchor='w')
 
-    tech_check2 = ttk.Checkbutton(tech_wind, text="Software Design and Development", command=empty, variable=tech2_var, onvalue="Software Design", offvalue="")
+    tech_check2 = ttk.Checkbutton(tech_wind, text="Software Design and Development", command=empty, variable=tech2_var, onvalue="Software Design and Development", offvalue="")
     tech_check2.pack(anchor='w')
 
     tech_check3 = ttk.Checkbutton(tech_wind, text="Industrial Technology - Timber and Furniture", command=empty, variable=tech3_var, onvalue="Timber", offvalue="")
@@ -370,7 +370,7 @@ def humanities():
     hum_check3 = ttk.Checkbutton(hum_wind, text="History Extension", command=empty, variable=hum3_var, onvalue="History Ext", offvalue="")
     hum_check3.pack(anchor='w')
 
-    hum_check4 = ttk.Checkbutton(hum_wind, text="Buisness Studies", command=empty, variable=hum4_var, onvalue="Buisness Studies", offvalue="")
+    hum_check4 = ttk.Checkbutton(hum_wind, text="Business Studies", command=empty, variable=hum4_var, onvalue="Business Studies", offvalue="")
     hum_check4.pack(anchor='w')
 
     hum_check5 = ttk.Checkbutton(hum_wind, text="Economics", command=empty, variable=hum5_var, onvalue="Economics", offvalue="")
@@ -474,12 +474,13 @@ def misc():
     back_button = ttk.Button(misc_wind, text="Back", command=back)
     back_button.pack(pady=10)
 
+# Test function to automatically select subjects
 def test():
     user_selections.append("Mathematics Advanced")
     user_selections.append("English Advanced")
     user_selections.append("Biology")
     user_selections.append("Chemistry")
-    user_selections.append("Software Design")
+    user_selections.append("Software Design and Development")
     update_selection_label()
 
 test_btn = ttk.Button(career_app, text="Test", command=test)
@@ -594,11 +595,19 @@ def ranking():
         number_slider.bind("<ButtonRelease-1>", lambda event: update_ATAR_label())
 
 
-        # TBC Is the function which will process the user's final choices
-    def subject_filter():
+    # Function to process user's selections and display the results
+    def results():
         # Initialize choice filters
         choice_filters = [favourite_var.get(), performance_var.get()]
 
+        # Technically doesn't matter what language the user does, so replace favourite_var.get() as "Languages"
+        if "Chinese Beginners" or "Chinese Continuers" or "Japanese Beginners" or "Japanese Continuers" or "Italian Beginners" or "Italian Continuers" in favourite_var.get():
+            choice_filters[0] = "Languages"
+
+        # Replaces performance_var.get() with "Languages"
+        if "Chinese Beginners" or "Chinese Continuers" or "Japanese Beginners" or "Japanese Continuers" or "Italian Beginners" or "Italian Continuers" in performance_var.get():
+            choice_filters[1] = "Languages"
+        
         # Read the data from the csv file (containing all the degrees, subjects, universities, etc.)
         df = pd.read_csv("degree_table.csv")
 
@@ -609,16 +618,44 @@ def ranking():
         # Retrieve the selected university from the dropdown list
         print(f"Selected University: {university_selection_var.get()}")
 
-        # Filter the dataframe to only include rows where the selected university is in the list of universities
+        # Initial filtering by the selected university
         filtered_df = df[df['Universities'].apply(lambda x: university_selection_var.get() in x)]
 
-        # Ensure 'Subjects' and 'Universities' columns are lists for the following filtering
-        if 'Subjects' in filtered_df.columns and 'Universities' in filtered_df.columns:
-            # Filter dataframe to only include degrees where the user's favourite and best performing subjects are included...
-            # the user's least favourite is excluded, and the predicted ATAR is less than or equal to the user's selection
-            filtered_df = filtered_df[
-                filtered_df['Subjects'].apply(lambda x: all(subject in x for subject in choice_filters) and least_favourite_var.get() not in x) # subjects
-                & (filtered_df['Prev LSR'] <= number_slider.get())] # ATAR
+        # Initial filtering by subjects, including least favourite subject, and LSR
+        filtered_df = filtered_df[
+            filtered_df['Subjects'].apply(lambda x: all(subject in x for subject in choice_filters) and least_favourite_var.get() in x)
+            & (filtered_df['Prev LSR'] <= number_slider.get())
+        ]
+
+        # Check if the filtered list is empty
+        if filtered_df.empty:
+            # Remove the least favourite subject modifier from filtering
+            filtered_df = df[
+                df['Universities'].apply(lambda x: university_selection_var.get() in x)
+                & df['Subjects'].apply(lambda x: all(subject in x for subject in choice_filters))
+                & (df['Prev LSR'] <= number_slider.get())
+            ]
+            
+            # Check again if the filtered list is empty after excluding the least favourite subject
+            if filtered_df.empty:
+                # Remove the best performing subject if it exists in choice_filters
+                if performance_var.get() in choice_filters:
+                    choice_filters.remove(performance_var.get())
+                
+                filtered_df = df[
+                    df['Universities'].apply(lambda x: university_selection_var.get() in x)
+                    & df['Subjects'].apply(lambda x: all(subject in x for subject in choice_filters))]
+                
+                # Check again if the filtered list is empty after excluding the best performing subject
+                if filtered_df.empty:
+                    messagebox.showerror("Error", "No degrees found with the given criteria.")
+                    return
+
+        # Use the filtered dataframe for further processing
+        # The rest of your code here
+
+
+
 
             # Print out the degrees, subjects, and Prev LSR (for testing purposes)
             for index, row in filtered_df.iterrows():
@@ -628,9 +665,28 @@ def ranking():
                 print()
 
         else:
-            print("Filtered dataframe does not have expected 'Subjects' or 'Universities' columns")
+            messagebox.showerror("Error", "Error processing data in csv. Please try again.")
 
-    submit_button = ttk.Button(rank_win, text="Submit Rankings", command=subject_filter)
+        rank_win.destroy()
+        result_win = Toplevel(career_app)
+        result_win.title("Results")
+        result_win.geometry("400x400")
+
+        result_label = ttk.Label(result_win, text="Results")
+        result_label.grid(column=0, row=0, sticky=(N,W,E,S))
+
+        # Contains the degrees outputted
+        list_box = Listbox(result_win, height=10, width=60)
+        list_box.grid(column=0, row=1, sticky=(N,W,E,S))
+        scroll = ttk.Scrollbar(result_win, orient=VERTICAL, command=list_box.yview)
+        scroll.grid(column=1, row=1, sticky=(N,S))
+        list_box['yscrollcommand'] = scroll.set
+        
+        for index, row in filtered_df.iterrows():
+            list_box.insert('end', f"{row['Course name']}")
+
+
+    submit_button = ttk.Button(rank_win, text="Submit Rankings", command=results)
     submit_button.pack(pady=10)
 
 # Button to open ranking window

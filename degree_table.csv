@@ -1,9 +1,9 @@
 Course name,University,Prev LSR,Relevant HSC Subjects
 Bachelor of Accounting and Finance,Australian Catholic University,60.2,"Economics, Mathematics Advanced, Business Studies"
 Bachelor of Arts,Australian Catholic University,60.25,"Languages, Modern History, Ancient History, English Advanced"
-Bachelor of Arts (Western Civilisation),Australian Catholic University,0.0,"Modern History, Ancient History Extension, Languages, Modern History, Ancient History, English Advanced"
-Bachelor of Arts (Western Civilisation)/Bachelor of Laws,Australian Catholic University,0.0,"Modern History, Ancient History Extension, Legal Studies, Modern History, Ancient History, Languages, English Advanced"
-Bachelor of Arts (Western Civilisation)/Master of Teaching (Secondary),Australian Catholic University,0.0,"Modern History, Ancient History Extension, Modern History, Ancient History, Mathematics Standard, Languages, English Advanced"
+Bachelor of Arts (Western Civilisation),Australian Catholic University,0.0,"Modern History, Ancient History, Languages, Modern History, Ancient History, English Advanced"
+Bachelor of Arts (Western Civilisation)/Bachelor of Laws,Australian Catholic University,0.0,"Modern History, Ancient History, Legal Studies, Modern History, Ancient History, Languages, English Advanced"
+Bachelor of Arts (Western Civilisation)/Master of Teaching (Secondary),Australian Catholic University,0.0,"Modern History, Ancient History, Modern History, Ancient History, Mathematics Standard, Languages, English Advanced"
 Bachelor of Arts/Bachelor of Commerce,Australian Catholic University,62.25,"Modern History, Ancient History, Business Studies, Economics, Mathematics Advanced, Languages, English Advanced"
 Bachelor of Arts/Bachelor of Global Studies,Australian Catholic University,59.85,"Languages, Modern History, Ancient History, Geography, English Advanced"
 Bachelor of Arts/Bachelor of Laws,Australian Catholic University,75.05,"Languages, Legal Studies, Modern History, Ancient History, English Advanced"
@@ -1748,8 +1748,7 @@ Bachelor of Entrepreneurship (Games Design and Simulation),Western Sydney Univer
 "Bachelor of Graphic Design (Pathway to Teaching Secondary)/Master of
 Teaching (Secondary)",Western Sydney University,62.05,"Mathematics Standard, Modern History, Ancient History, English Advanced"
 Bachelor of Health and Physical Education,Western Sydney University,65.25,"Mathematics Standard, , English Advanced"
-"Bachelor of Health and Physical Education Pathway to Teaching (Secondary)/
-Master of Teaching (Secondary)",Western Sydney University,71.95,"Mathematics Standard, , Modern History, Ancient History, English Advanced"
+"Bachelor of Health and Physical Education Pathway to Teaching (Secondary)/Master of Teaching (Secondary)",Western Sydney University,71.95,"Mathematics Standard, , Modern History, Ancient History, English Advanced"
 "Bachelor of Health Science (Health Promotion, Health Services Management, Recreational Therapy or Public Health)",Western Sydney University,66.5,"Biology, Physics, Chemistry"
 "Bachelor of Health Science (Health Promotion, Health Services Management, Recreational Therapy, Public Health or Clinical Sciences)",Western Sydney University,66.45,"Biology, Physics, Chemistry"
 "Bachelor of Health Science (Health Promotion, Recreational Therapy or Public Health)",Western Sydney University,65.3,"Biology, Physics, Chemistry"
