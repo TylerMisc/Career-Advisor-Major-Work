@@ -443,7 +443,7 @@ def misc():
     misc_check2 = ttk.Checkbutton(misc_wind, text="Drama", command=empty, variable=misc2_var, onvalue="Drama", offvalue="")
     misc_check2.pack(anchor='w')
 
-    misc_check3 = ttk.Checkbutton(misc_wind, text="Music 1", command=empty, variable=misc3_var, onvalue="Music `1", offvalue="")
+    misc_check3 = ttk.Checkbutton(misc_wind, text="Music 1", command=empty, variable=misc3_var, onvalue="Music 1", offvalue="")
     misc_check3.pack(anchor='w')
 
     misc_check4 = ttk.Checkbutton(misc_wind, text="Music 2", command=empty, variable=misc4_var, onvalue="Music 2", offvalue="")
@@ -664,8 +664,6 @@ def ranking():
                 print(f"Prev LSR: {row['Prev LSR']}")
                 print()
 
-        else:
-            messagebox.showerror("Error", "Error processing data in csv. Please try again.")
 
         rank_win.destroy()
         result_win = Toplevel(career_app)
@@ -706,7 +704,7 @@ career_app.mainloop()
 
 # Take prioritised subject and the student type they fit into (eg. Science student) and eliminate degrees which don't fit user ✅
 # Produce degree that most fits user, alongside which University(ies) that offers that degree ✅
-# Minor: Error messages for when a user has choices which don't produce any results
+# Minor: Error messages for when a user has choices which don't produce any results ✅
 # Some degrees (like a doctorate of medicine) have no LSR, but they are difficult so shouldn't be reccomended for people with low ATARs
     # I might need to fix this manually, we'll see
 # Underneath produce alternative degrees possibly based off their second and third highest subject
