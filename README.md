@@ -21,7 +21,19 @@ With just under 2000 degrees in this program's database from over 15 universitie
 
 
 ## Installation
-Step-by-step guide on how to set up the project
+Begin by downloading the Pandas API:
+
+1. Type into your windows/apple search bar "Terminal"
+
+2. Open terminal and if you are on windows, type "pip install pandas", if you are mac, type "pip3 install pandas"
+
+Then download the files:
+
+1. Open the home page of the repo screen
+
+2. Click the green button titled "code" then click "download zip file"
+
+3. Open the zip file and double-click the file titled "career_advisor_app.py" to run the program
 
 ## How to use
 
@@ -52,7 +64,9 @@ Screenshots or graphics to show what the project is about
 
 ## Acknowledgements
 This program uses the Tkinter and Pandas API
+
 Big thanks to Mr Fong for helping me develop this idea further and helping me through development
+
 Lots of data is scraped from UAC (University Admissions Centre)
 
 ## Author Details
