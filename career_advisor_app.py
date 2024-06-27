@@ -78,7 +78,7 @@ def english():
         if any(subject in user_selections for subject in english_subjects):
 
             # If they have, ask if they want to change it
-            if messagebox.askyesno(message="You have already selected an English subject. Are you sure you want to change it?", icon="warning", title="Warning"):
+            if messagebox.askyesno(message="You have already selected an English subject. Are you sure you want to remove it?", icon="warning", title="Warning"):
                 user_selections.remove([subject for subject in user_selections if subject in english_subjects][0]) # removes the selected English subject
                 user_selections.append(eng_var.get()) # adds the new selected English subject
                 english_wind.destroy() # closes the window
@@ -133,10 +133,21 @@ def maths():
         radio_btn.pack(anchor='w')
 
     def submit():
-        user_selections.append(maths_var.get())
-        maths_wind.destroy()
-        update_selection_label()
-        career_app.deiconify()
+        # Checks if the user has already selected a maths subject
+        if any(subject in user_selections for subject in math_subjects):
+
+            # If they have, ask if they want to change it
+            if messagebox.askyesno(message="You have already selected an Maths subject. Are you sure you want to remove it?", icon="warning", title="Warning"):
+                user_selections.remove([subject for subject in user_selections if subject in math_subjects][0]) # removes the selected Maths subject
+                user_selections.append(maths_var.get()) # adds the new selected Maths subject
+                maths_wind.destroy() # closes the window
+                update_selection_label() # updates the label
+                career_app.deiconify()
+        else:
+            user_selections.append(maths_var.get()) # adds the selected Maths subject
+            maths_wind.destroy() # closes the window
+            update_selection_label() # updates the label
+            career_app.deiconify() # shows the main window
 
     next_button = ttk.Button(maths_wind, text="Submit", command=submit)
     next_button.pack(pady=10)
@@ -470,8 +481,10 @@ def humanities():
         global user_selections
         global duplicates
         
+        hum_selected = [hum_var.get() for hum_var in [anc_hist_var, mod_hist_var, hist_ext_var, business_var, eco_var, legal_var, geo_var, sor1_var, sor2_var] if hum_var.get()]
+
         # Checks if a subject has already been selected
-        duplicates = [subject for subject in [anc_hist_var.get(), mod_hist_var.get(), hist_ext_var.get(), business_var.get(), eco_var.get(), legal_var.get(), geo_var.get(), sor1_var.get(), sor2_var.get()] if subject in user_selections]
+        duplicates = [subject for subject in hum_selected if subject in user_selections]
         if duplicates:
             message = "You have already selected these subject(s), would you like to remove them?"
             response = messagebox.askyesno("Duplicate Subjects", message)
@@ -553,8 +566,10 @@ def misc():
         global user_selections
         global duplicates
         
+        misc_selected = [misc_var.get() for misc_var in [pdhpe_var, drama_var, music1_var, music2_var, visual_arts_var] if misc_var.get()]
+
         # Checks if a subject has already been selected
-        duplicates = [subject for subject in [pdhpe_var.get(), drama_var.get(), music1_var.get(), music2_var.get(), visual_arts_var.get()] if subject in user_selections]
+        duplicates = [subject for subject in misc_selected if subject in user_selections]
         if duplicates:
             message = "You have already selected these subject(s), would you like to remove them?"
             response = messagebox.askyesno("Duplicate Subjects", message)
