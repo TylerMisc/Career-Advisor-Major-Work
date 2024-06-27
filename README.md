@@ -21,56 +21,62 @@ With just under 2000 degrees in this program's database from over 15 universitie
 
 
 ## Installation
-Begin by downloading the Pandas API:
+### Download the Pandas API:
 
 1. Type into your windows/apple search bar "Terminal"
 
-2. Open terminal and if you are on windows, type "pip install pandas", if you are mac, type "pip3 install pandas"
+2. Open terminal and if you are on *Windows*, type **"pip install pandas"**, if you are on *Mac/Apple*, type **"pip3 install pandas"**
 
-Then download the files:
+### Download the files:
 
-1. Open the home page of the repo screen
+1. Open the *home page* of the repo screen
 
-2. Click the green button titled "code" then click "download zip file"
+2. Click the *green button titled "code"* then click **"download zip file"**
 
-3. Open the zip file and double-click the file titled "career_advisor_app.py" to run the program
+3. Open the zip file and double-click the file titled **"career_advisor_app.py"** to run the program
 
 ## How to use
 
-Home Screen:
+#### Home Screen:
 
-This screen contains eight buttons. All the buttons except for the submit buttons will take you to another window to choose the subjects which you have done/are doing in the HSC
+This screen contains eight buttons. All the buttons except for the submit buttons will take you to another window to choose the subjects that you have done/are doing in the HSC
 Each button has a category of subject, for example, there is "Sciences" which contain Biology, Chemistry, Physics, etc.
 Once you have clicked on one of the subjects in these windows, you may press submit to add it to the list
 If you have made a mistake, simply go back to the screen and reselect that subject to remove it
 Once you have made all your subject choices, press the submit button on the home screen to continue.
 
-Further Information Screen:
+#### Further Information Screen:
 
 This screen contains four dropdown lists, a slider, and a button
 The four dropdown lists allow you to choose your favourite, least favorite, and best performing subjects, as well as your preferred university
 The slider allows you to customise your projected ATAR, shown by a label below it
 Once you have filled out all the fields, press submit rankings to get your results
 
-Degree Display Screen:
+#### Degree Display Screen:
 
 This screen will show you your recommended degrees in a convenient scrolling list!
 
 ## Licence Information
-Mention the type of license the project is under
+This program is public domain, open for anyone to copy or modify and not subject to copyright
 
 ## Visuals
-Screenshots or graphics to show what the project is about
+![alt text](https://github.com/TylerMisc/Career-Advisor-Major-Work/blob/main/screenshot1.jpg?raw=true)
+![alt text](https://github.com/TylerMisc/Career-Advisor-Major-Work/blob/main/screenshot2.jpg?raw=true)
+![alt text](https://github.com/TylerMisc/Career-Advisor-Major-Work/blob/main/screenshot3.jpg?raw=true)
 
 ## Acknowledgements
 This program uses the Tkinter and Pandas API
 
-Big thanks to Mr Fong for helping me develop this idea further and helping me through development
+Andrew Fong (andrewfong1988) was a large contributor in helping me develop the idea and develop the code
 
-Lots of data is scraped from UAC (University Admissions Centre)
+UAC (University Admissions Centre) was the source of the degrees on the csv
+
+NESA (NSW Education Standards Authority) are responsible for the HSC (Higher School Certificate) subjects
+
+Saint Augustines Sydney (Brookvale) provided the equipment and technology to develop this program
 
 ## Author Details
-Tyler Misciagna: Year 12 Software Design and Development student in Sydney, NSW
+Tyler Misciagna: Year 12 Software Design and Development student in Sydney, NSW, Australia
 
 ## Documentation
-A link to your documentation file
+Download directly from repo. Word doc titled "Career-Advisor-App-Documentation.docx" is attached, and just raw download it.
